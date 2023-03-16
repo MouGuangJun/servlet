@@ -1,0 +1,58 @@
+package com.servlet.osf.server;
+
+import com.servlet.exception.OSFException;
+import com.servlet.osf.OSFContext;
+import com.servlet.osf.listener.OSFDefaultListener;
+import com.servlet.osf.listener.OSFListener;
+import com.servlet.osf.message.ReqServiceMsg;
+import com.servlet.osf.message.RespServiceMsg;
+import com.servlet.utils.OSFUtils;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.servlet.ServletConfig;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+public abstract class AbstractServerModel extends LoadSourceServerModel {
+    protected OSFListener listener;
+    protected ServiceEngine serviceEngine;
+
+    @Override
+    public void load(ServletConfig config) throws OSFException {
+        super.load(config);
+        String listener = config.getInitParameter("OSFListener");
+        this.listener = (OSFListener) OSFUtils.createObj(OSFException.LISTENER_REFLECT_ERROR, listener);
+        String serviceEngine = config.getInitParameter("OSFServiceEngine");
+        this.serviceEngine = (ServiceEngine) OSFUtils.createObj(OSFException.SERVICE_ENGINE_REFLECT_ERROR, serviceEngine);
+
+        this.defProcess();
+    }
+
+    protected void defProcess() {
+        if (listener == null) {
+            listener = new OSFDefaultListener();
+        }
+
+        if (serviceEngine == null) {
+            serviceEngine = new DefaultServiceEngine();
+        }
+    }
+
+    @Override
+    public void service(InputStream in, OutputStream out, OSFContext context) throws OSFException {
+        listener.start(context);// 开始OSF服务
+        ReqServiceMsg request = this.receive(in, context);// 接收请求报文
+        listener.beforeExecute(request, context);// 执行服务前
+        // 执行服务并获取响应结果
+        RespServiceMsg response = serviceEngine.execute(request, context);
+        listener.afterExecute(request, response, context);// 服务执行后
+        this.send(response, out, context);// 通知客户端
+    }
+
+    protected abstract ReqServiceMsg receive(InputStream in, OSFContext context) throws OSFException;
+
+    protected abstract void send(RespServiceMsg res, OutputStream out, OSFContext context) throws OSFException;
+}
