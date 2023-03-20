@@ -1,7 +1,10 @@
-package com.servlet.exception;
+package com.servlet.osf.exception;
 
 import lombok.Getter;
 
+/**
+ * OSF执行异常
+ */
 public class OSFException extends RuntimeException {
     public static final int NORMAL_ERROR = 999999;
     // 业务导致的异常 1XXXXX
@@ -11,6 +14,7 @@ public class OSFException extends RuntimeException {
     // 901XXX json解析异常
     public static final int JSON_PROCESSING = 901010;// json解析错误
     // 902XXX java反射异常
+    public static final int REFLECT_NORMAL_ERROR = 902000;// 反射一般异常
     public static final int JSONPACKER_REFLECT_ERROR = 902010;// jsonpacker反射异常
     public static final int LISTENER_REFLECT_ERROR = 902020;// listener反射异常
     public static final int OSF_SERVICE_REFLECT_ERROR = 902030;// osf服务反射异常

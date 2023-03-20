@@ -1,13 +1,13 @@
 package com.servlet.osf.server;
 
 import cn.hutool.core.io.IoUtil;
-import com.servlet.exception.OSFException;
+import com.servlet.osf.exception.OSFException;
 import com.servlet.osf.OSFContext;
 import com.servlet.osf.json.DefaultJsonPacker;
 import com.servlet.osf.json.JsonPacker;
 import com.servlet.osf.message.ReqServiceMsg;
 import com.servlet.osf.message.RespServiceMsg;
-import com.servlet.utils.OSFUtils;
+import com.servlet.osf.utils.OSFUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,6 +19,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * 字符串类型服务执行器
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class StringPayloadServerModel extends AbstractServerModel {
@@ -30,13 +33,12 @@ public class StringPayloadServerModel extends AbstractServerModel {
         String jsonPackerClass = config.getInitParameter("JsonPackerClass");
         this.jsonPacker = (JsonPacker) OSFUtils.createObj(OSFException.JSONPACKER_REFLECT_ERROR, jsonPackerClass);
 
-        this.defProcess();
+        defProcess();
     }
 
-    @Override
-    protected void defProcess() {
-        if (jsonPacker == null) {
-            jsonPacker = new DefaultJsonPacker();
+    private void defProcess() {
+        if (this.jsonPacker == null) {
+            this.jsonPacker = new DefaultJsonPacker();
         }
     }
 

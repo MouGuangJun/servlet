@@ -8,7 +8,9 @@ import com.servlet.osf.entity.esb.RespPageInfo;
 
 import java.io.IOException;
 
-
+/**
+ * 分页JSON序列化器
+ */
 @Deprecated
 public class PageInfoSerializer extends StdSerializer<PageInfo> {
     public PageInfoSerializer() {

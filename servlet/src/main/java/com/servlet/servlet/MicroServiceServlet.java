@@ -1,6 +1,6 @@
 package com.servlet.servlet;
 
-import com.servlet.exception.OSFException;
+import com.servlet.osf.exception.OSFException;
 import com.servlet.osf.OSFContext;
 import com.servlet.osf.server.StringPayloadServerModel;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * OSF服务入口Servlet
+ */
 @Slf4j
 public class MicroServiceServlet extends HttpServlet {
 

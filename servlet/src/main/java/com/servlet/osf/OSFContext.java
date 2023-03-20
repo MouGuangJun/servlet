@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * OSF上下文对象
+ */
 @Data
 public class OSFContext {
     private static final ThreadLocal<OSFContext> globalContext = new InheritableThreadLocal<>();

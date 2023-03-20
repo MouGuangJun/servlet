@@ -25,10 +25,6 @@ public class Log4jInitServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        String prefix = getServletContext().getRealPath("/");
-        String file = getInitParameter("log4j-file");
-        if (file != null) {
-            PropertyConfigurator.configure(prefix + file);
-        }
+        PropertyConfigurator.configure(Log4jInitServlet.class.getClassLoader().getResource("log4j.properties"));
     }
 }

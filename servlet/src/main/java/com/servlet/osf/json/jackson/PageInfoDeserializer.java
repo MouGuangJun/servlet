@@ -10,6 +10,9 @@ import com.servlet.osf.entity.esb.ReqPageInfo;
 
 import java.io.IOException;
 
+/**
+ * 分页请求对象JSON反序列化器
+ */
 public class PageInfoDeserializer extends StdDeserializer<PageInfo> {
 
     public PageInfoDeserializer() {

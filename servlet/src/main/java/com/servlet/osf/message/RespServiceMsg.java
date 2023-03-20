@@ -1,13 +1,15 @@
 package com.servlet.osf.message;
 
-import com.servlet.osf.entity.esb.AppHeader;
+import com.servlet.osf.entity.esb.RespAppHeader;
 import com.servlet.osf.entity.esb.RespEsbHeader;
-import com.servlet.osf.entity.response.BaseResponse;
 import lombok.Data;
 
+/**
+ * OSF响应总信息
+ */
 @Data
 public class RespServiceMsg {
     private RespEsbHeader EsbHeader;
-    private BaseResponse Body;
-    private AppHeader AppHeader;
+    private Object Body;
+    private RespAppHeader AppHeader;
 }

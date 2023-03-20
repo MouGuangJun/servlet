@@ -1,12 +1,12 @@
 package com.servlet.osf.server;
 
-import com.servlet.exception.OSFException;
 import com.servlet.osf.OSFContext;
+import com.servlet.osf.exception.OSFException;
 import com.servlet.osf.listener.OSFDefaultListener;
 import com.servlet.osf.listener.OSFListener;
 import com.servlet.osf.message.ReqServiceMsg;
 import com.servlet.osf.message.RespServiceMsg;
-import com.servlet.utils.OSFUtils;
+import com.servlet.osf.utils.OSFUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +14,9 @@ import javax.servlet.ServletConfig;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * 通用服务执行器
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 public abstract class AbstractServerModel extends LoadSourceServerModel {
@@ -28,16 +31,19 @@ public abstract class AbstractServerModel extends LoadSourceServerModel {
         String serviceEngine = config.getInitParameter("OSFServiceEngine");
         this.serviceEngine = (ServiceEngine) OSFUtils.createObj(OSFException.SERVICE_ENGINE_REFLECT_ERROR, serviceEngine);
 
-        this.defProcess();
+        defProcess();
     }
 
-    protected void defProcess() {
-        if (listener == null) {
-            listener = new OSFDefaultListener();
+    /**
+     * 当处理器为空时，默认处理器
+     */
+    private void defProcess() {
+        if (this.listener == null) {
+            this.listener = new OSFDefaultListener();
         }
 
-        if (serviceEngine == null) {
-            serviceEngine = new DefaultServiceEngine();
+        if (this.serviceEngine == null) {
+            this.serviceEngine = new DefaultServiceEngine();
         }
     }
 

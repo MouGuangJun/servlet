@@ -5,6 +5,9 @@ import com.servlet.osf.entity.OSFService;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * OSF资源管理器
+ */
 public class OSFManager {
     private static final Map<String, OSFService> services = new HashMap<>();
 

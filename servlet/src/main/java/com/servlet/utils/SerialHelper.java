@@ -2,14 +2,18 @@ package com.servlet.utils;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.setting.dialect.Props;
+import com.servlet.config.SystemConfig;
 
-import java.io.IOException;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
  * 自动获取当前的最大流水号主键
  */
 public class SerialHelper {
+
     /**
      * 获取当前最大的流水号（不使用数据的方法）
      *
@@ -22,10 +26,6 @@ public class SerialHelper {
         return prefix + getSimpleSerialNo(tableName, columnName);
     }
 
-    public static void main(String[] args) throws IOException {
-
-    }
-
     /**
      * 获取当前最大的流水号（不使用数据的方法）
      *
@@ -33,7 +33,7 @@ public class SerialHelper {
      * @param columnName 列名
      * @return 最大的流水号
      */
-    public static String getSimpleSerialNo(String tableName, String columnName) {
+    public static synchronized String getSimpleSerialNo(String tableName, String columnName) {
         if (StrUtil.isBlank(tableName) || StrUtil.isBlank(columnName)) {
             return null;
         }
@@ -41,31 +41,31 @@ public class SerialHelper {
         // 转换为大写
         tableName = tableName.toUpperCase();
         columnName = columnName.toUpperCase();
-        String path = SerialHelper.class.getResource("/").getPath();
 
+        String serialPath = SystemConfig.getResourcesRoot() + File.separator + "serial.properties";
         // 设置文件路径
-        PropUtils.path = "D:/IDEAWorkSpace/gmall-web/gmall-base/src/main/resources/serial/serial.properties";
+        Props prop = Props.getProp(serialPath, StandardCharsets.UTF_8);
         // 需要匹配的名字
         String name = tableName + "_" + columnName;
-        String value = PropUtils.getValue(name);
+        String value = prop.getStr(name);
+
         String serial;// 新的流水号
         // 不存在对应的key值，进行初始化操作
         String rightDate = DateUtil.format(new Date(), "yyyyMMdd");
         if (value == null || !value.substring(0, 8).equals(rightDate)) {
             serial = getSerialByNum(rightDate, 1L);
             // 保存的操作
-            PropUtils.setValue(name, serial);
-
-            return serial;
+            prop.setProperty(name, serial);
+        } else {
+            value = value.substring(8);
+            long oldNum = Long.parseLong(value);
+            // 获取新的流水号
+            serial = getSerialByNum(rightDate, oldNum + 1L);
+            // 保存的操作
+            prop.setProperty(name, serial);
         }
-
-        value = value.substring(8);
-        long oldNum = Long.parseLong(value);
-
-        // 获取新的流水号
-        serial = getSerialByNum(rightDate, oldNum + 1L);
-        // 保存的操作
-        PropUtils.setValue(name, serial);
+        // 储存到文件中
+        prop.store(serialPath);
 
         return serial;
     }

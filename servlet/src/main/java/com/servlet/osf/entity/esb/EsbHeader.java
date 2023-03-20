@@ -7,22 +7,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.servlet.osf.message.ReqServiceMsg;
 import lombok.Data;
 
+/**
+ * ESB头
+ */
 @Data
 public class EsbHeader {
-    private String SERVICE_NAME;
-    private String SERVICE_VERSION;
-    private String SCENES_CODE;
-    private String SCENES_VERSION;
-    private String CHANNEL_CODE;
-    private String CONSUM_REQ_DATE;
-    private String CONSUM_REQ_TIME;
-    private String CONSUM_SYS_CODE;
-    private String SERVICE_REQ_SEQ;
-    private String GLOBAL_SEQ;
-    private String SRC_ENC_CODE;
-    private String DEST_ENC_NODE;
-    private String FILE_PATH;
-    private String FILE_FLAG;
+    private String SERVICE_NAME;// 服务编码
+    private String SERVICE_VERSION;// 服务编码版本号
+    private String SCENES_CODE;// 场景编码
+    private String SCENES_VERSION;// 场景编码版本号
+    private String CHANNEL_CODE;// 发起渠道标识
+    private String CONSUM_REQ_DATE;// 请求系统日期
+    private String CONSUM_REQ_TIME;// 请求系统时间
+    private String CONSUM_SYS_CODE;// 服务请求方标识
+    private String SERVICE_REQ_SEQ;// 请求系统流水号
+    private String GLOBAL_SEQ;// 全局流水号
+    private String SRC_ENC_CODE;// 源加密节点
+    private String DEST_ENC_NODE;// 目标加密节点
+    private String FILE_PATH;// 文件标识
+    private String FILE_FLAG;// 文件路径
 
 
     public static void main(String[] args) throws JsonProcessingException {
@@ -41,7 +44,7 @@ public class EsbHeader {
         esbHeader.setFILE_FLAG("0");
         reqServiceMsg.setEsbHeader(esbHeader);
 
-        AppHeader appHeader = new AppHeader();
+        ReqAppHeader appHeader = new ReqAppHeader();
         appHeader.setLEGAL_CODE("999999");
         appHeader.setSUB_SYS_ID("CCMS0");
         appHeader.setBRANTH_ID("53030200");

@@ -4,6 +4,9 @@ import com.servlet.osf.OSFContext;
 import com.servlet.osf.message.ReqServiceMsg;
 import com.servlet.osf.message.RespServiceMsg;
 
+/**
+ * 监听器
+ */
 public interface OSFListener {
     // 执行OSF服务开始
     void start(OSFContext context);
