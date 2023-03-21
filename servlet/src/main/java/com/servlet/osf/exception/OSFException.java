@@ -9,6 +9,8 @@ public class OSFException extends RuntimeException {
     public static final int NORMAL_ERROR = 999999;
     // 业务导致的异常 1XXXXX
     public static final int SERVICE_NOT_FOUND = 101010;// 服务未找到
+    public static final int CLIENT_NAME_EMPTY = 101020;// 客户端名称为空
+
 
     // 程序异常 9XXXXX
     // 901XXX json解析异常
@@ -20,6 +22,7 @@ public class OSFException extends RuntimeException {
     public static final int OSF_SERVICE_REFLECT_ERROR = 902030;// osf服务反射异常
 
     public static final int SERVICE_ENGINE_REFLECT_ERROR = 902020;// listener反射异常
+
 
     // 903XXX java IO异常
     public static final int RESP_WRITER_IO_ERROR = 903010;// servlet返回时writer io异常

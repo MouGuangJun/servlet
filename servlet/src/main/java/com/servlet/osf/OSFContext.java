@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,8 @@ import java.util.Map;
  * OSF上下文对象
  */
 @Data
-public class OSFContext {
+public class OSFContext implements Serializable {
+    private static final long serialVersionUID = 115933987027560594L;
     private static final ThreadLocal<OSFContext> globalContext = new InheritableThreadLocal<>();
     private String reqJsonStr;// 请求的json内容
     private ReqServiceMsg request;// 请求的json信息

@@ -1,8 +1,7 @@
 package com.servlet.osf.json;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.servlet.osf.exception.OSFException;
 import com.servlet.osf.OSFContext;
+import com.servlet.osf.exception.OSFException;
 import com.servlet.osf.message.ReqServiceMsg;
 import com.servlet.osf.message.RespServiceMsg;
 
@@ -10,10 +9,8 @@ import com.servlet.osf.message.RespServiceMsg;
  * JSON处理器
  */
 public interface JsonPacker {
-    ObjectMapper mapper = new ObjectMapper();
-
     /**
-     * 解析
+     * 封装
      *
      * @param response 响应信息
      * @param context  上下文

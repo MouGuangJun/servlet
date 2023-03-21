@@ -1,4 +1,4 @@
-package com.servlet.osf.loader;
+package com.servlet.osf.processer.loader;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.servlet.osf.constant.OSFType;

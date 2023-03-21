@@ -62,7 +62,7 @@ public class StringPayloadServerModel extends AbstractServerModel {
         } catch (IOException e) {
             throw new OSFException(OSFException.RESP_WRITER_IO_ERROR, e);
         }
-        listener.afterSend(context);
+        listener.end(context);
     }
 
     public OSFContext createOSFContext() {

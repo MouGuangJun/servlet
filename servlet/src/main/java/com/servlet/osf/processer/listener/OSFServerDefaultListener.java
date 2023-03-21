@@ -1,4 +1,4 @@
-package com.servlet.osf.listener;
+package com.servlet.osf.processer.listener;
 
 import cn.hutool.core.date.DateUtil;
 import com.servlet.osf.OSFContext;
@@ -12,7 +12,7 @@ import java.util.Date;
  * OSF服务执行监听器
  */
 @Slf4j
-public class OSFDefaultListener implements OSFListener {
+public class OSFServerDefaultListener implements OSFServerListener {
     @Override
     public void start(OSFContext context) {
         log.info("执行OSF服务开始...");
@@ -25,7 +25,7 @@ public class OSFDefaultListener implements OSFListener {
     }
 
     @Override
-    public void afterExecute(ReqServiceMsg req, RespServiceMsg resp, OSFContext context) {
+    public void afterExecute(RespServiceMsg resp, OSFContext context) {
         log.info("执行业务逻辑结束：" + DateUtil.formatDateTime(new Date()));
     }
 
@@ -35,7 +35,7 @@ public class OSFDefaultListener implements OSFListener {
     }
 
     @Override
-    public void afterSend(OSFContext context) {
+    public void end(OSFContext context) {
         log.info("OSF服务执行结束...");
     }
 }

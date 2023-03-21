@@ -1,7 +1,5 @@
 package com.servlet.osf.json;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.servlet.osf.OSFContext;
@@ -16,19 +14,7 @@ import com.servlet.osf.message.RespServiceMsg;
 /**
  * 默认解析JSON报文的处理器
  */
-public class DefaultJsonPacker implements JsonPacker {
-    static {
-        //屏蔽get方法的序列化
-        mapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
-        //设置任何属性可见
-        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-        // 生成 module
-//        SimpleModule module = new SimpleModule();
-//        module.addSerializer(new PageInfoSerializer());
-//        module.addDeserializer(PageInfo.class, new PageInfoDeserializer());
-        // 注册 module
-//        mapper.registerModule(module);
-    }
+public class DefaultJsonPacker extends AbstractJsonPacker implements JsonPacker {
 
     @Override
     public String pack(RespServiceMsg response, OSFContext context) throws OSFException {

@@ -2,8 +2,8 @@ package com.servlet.osf.server;
 
 import com.servlet.osf.OSFContext;
 import com.servlet.osf.exception.OSFException;
-import com.servlet.osf.listener.OSFDefaultListener;
-import com.servlet.osf.listener.OSFListener;
+import com.servlet.osf.processer.listener.OSFServerDefaultListener;
+import com.servlet.osf.processer.listener.OSFServerListener;
 import com.servlet.osf.message.ReqServiceMsg;
 import com.servlet.osf.message.RespServiceMsg;
 import com.servlet.osf.utils.OSFUtils;
@@ -20,14 +20,14 @@ import java.io.OutputStream;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public abstract class AbstractServerModel extends LoadSourceServerModel {
-    protected OSFListener listener;
+    protected OSFServerListener listener;
     protected ServiceEngine serviceEngine;
 
     @Override
     public void load(ServletConfig config) throws OSFException {
         super.load(config);
         String listener = config.getInitParameter("OSFListener");
-        this.listener = (OSFListener) OSFUtils.createObj(OSFException.LISTENER_REFLECT_ERROR, listener);
+        this.listener = (OSFServerListener) OSFUtils.createObj(OSFException.LISTENER_REFLECT_ERROR, listener);
         String serviceEngine = config.getInitParameter("OSFServiceEngine");
         this.serviceEngine = (ServiceEngine) OSFUtils.createObj(OSFException.SERVICE_ENGINE_REFLECT_ERROR, serviceEngine);
 
@@ -39,7 +39,7 @@ public abstract class AbstractServerModel extends LoadSourceServerModel {
      */
     private void defProcess() {
         if (this.listener == null) {
-            this.listener = new OSFDefaultListener();
+            this.listener = new OSFServerDefaultListener();
         }
 
         if (this.serviceEngine == null) {
@@ -54,7 +54,7 @@ public abstract class AbstractServerModel extends LoadSourceServerModel {
         listener.beforeExecute(request, context);// 执行服务前
         // 执行服务并获取响应结果
         RespServiceMsg response = serviceEngine.execute(request, context);
-        listener.afterExecute(request, response, context);// 服务执行后
+        listener.afterExecute(response, context);// 服务执行后
         this.send(response, out, context);// 通知客户端
     }
 

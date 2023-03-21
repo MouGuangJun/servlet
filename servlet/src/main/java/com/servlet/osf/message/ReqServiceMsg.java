@@ -1,6 +1,7 @@
 package com.servlet.osf.message;
 
 import cn.hutool.core.util.ReflectUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.servlet.osf.entity.esb.ReqAppHeader;
 import com.servlet.osf.entity.esb.ReqEsbHeader;
 import com.servlet.osf.entity.esb.RespAppHeader;
@@ -17,8 +18,10 @@ import java.util.List;
 @Data
 public class ReqServiceMsg {
     // APP HEADER不需要拷贝的属性
+    @JsonIgnore
     private final List<String> APP_IGNORE_FILEDS = Arrays.asList("SUB_SYS_ID", "PAGE_INFO", "CONFIRM_FLAG", "CONFIRM_STATUS");
     // ESB HEADER不需要拷贝的属性
+    @JsonIgnore
     private final List<String> ESB_IGNORE_FILEDS = Arrays.asList("SYS_EXTEND", "SRC_ENC_CODE", "DEST_ENC_NODE", "FILE_PATH", "FILE_FLAG");
     private ReqEsbHeader EsbHeader;
     private Object Body;

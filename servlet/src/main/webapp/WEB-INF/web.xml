@@ -24,7 +24,7 @@
 
         <init-param>
             <param-name>OSFListener</param-name>
-            <param-value>com.servlet.osf.listener.OSFDefaultListener</param-value>
+            <param-value>com.servlet.osf.processer.listener.OSFServerDefaultListener</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>

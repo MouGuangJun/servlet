@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.servlet.osf.OSFContext;
 import com.servlet.osf.OSFManager;
 import com.servlet.osf.exception.OSFException;
-import com.servlet.osf.loader.OSFServiceLoader;
+import com.servlet.osf.processer.loader.OSFServiceLoader;
 
 import javax.servlet.ServletConfig;
 

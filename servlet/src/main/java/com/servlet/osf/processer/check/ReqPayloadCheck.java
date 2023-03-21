@@ -1,4 +1,4 @@
-package com.servlet.osf.check;
+package com.servlet.osf.processer.check;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.servlet.osf.OSFContext;

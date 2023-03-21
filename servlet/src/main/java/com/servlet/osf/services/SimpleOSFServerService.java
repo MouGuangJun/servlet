@@ -4,7 +4,7 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import com.servlet.osf.OSFContext;
 import com.servlet.constant.SystemId;
-import com.servlet.osf.check.ReqPayloadCheck;
+import com.servlet.osf.processer.check.ReqPayloadCheck;
 import com.servlet.osf.constant.OSFCode;
 import com.servlet.osf.entity.esb.*;
 import com.servlet.osf.entity.esb.ReqAppHeader;
@@ -14,7 +14,7 @@ import com.servlet.osf.exception.OSFException;
 import com.servlet.osf.message.OSFTips;
 import com.servlet.osf.message.ReqServiceMsg;
 import com.servlet.osf.message.RespServiceMsg;
-import com.servlet.osf.parser.RespPayloadParser;
+import com.servlet.osf.processer.parser.RespPayloadParser;
 import com.servlet.osf.utils.OSFUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -123,8 +123,12 @@ public abstract class SimpleOSFServerService implements BaseService {
         app_RESP_PAGE_INFO = new RespPageInfo();
         ReqAppHeader appHeader = request.getAppHeader();
         // 设置页码信息
-        app_RESP_PAGE_INFO.setCURR_PAGE_NUM(appHeader.getPAGE_INFO().getCURR_PAGE_NUM());
-        app_RESP_PAGE_INFO.setPER_PAGE_NUM(appHeader.getPAGE_INFO().getPER_PAGE_NUM());
+        ReqPageInfo pageInfo = appHeader.getPAGE_INFO();
+        if (pageInfo != null) {
+            app_RESP_PAGE_INFO.setCURR_PAGE_NUM(pageInfo.getCURR_PAGE_NUM());
+            app_RESP_PAGE_INFO.setPER_PAGE_NUM(pageInfo.getPER_PAGE_NUM());
+        }
+
         esb_RET_INFO_ARRAY.add(esb_RET_INFO);
     }
 
