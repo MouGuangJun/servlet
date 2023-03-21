@@ -1,7 +1,7 @@
 package com.servlet.osf.entity;
 
 import com.servlet.osf.exception.OSFException;
-import com.servlet.osf.services.BaseService;
+import com.servlet.osf.services.server.BaseService;
 import lombok.Data;
 
 /**

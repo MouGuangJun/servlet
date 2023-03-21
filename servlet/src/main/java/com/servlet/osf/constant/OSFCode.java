@@ -17,4 +17,8 @@ public class OSFCode {
     // 服务返回状态
     public static final String RET_STATUS_SUCCESS = "S";// 成功
     public static final String RET_STATUS_FAILED = "F";// 失败
+
+    // 文件标识
+    public static final String FILE_FLAG_NONE = "0";// 无文件
+    public static final String FILE_FLAG = "1";// 有文件
 }

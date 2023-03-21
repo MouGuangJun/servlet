@@ -1,4 +1,4 @@
-package com.servlet.osf.services;
+package com.servlet.osf.services.server;
 
 import com.servlet.osf.OSFContext;
 import com.servlet.osf.exception.OSFException;

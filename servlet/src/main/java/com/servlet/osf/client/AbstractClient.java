@@ -28,8 +28,6 @@ public abstract class AbstractClient implements OSFClient {
     private String listenerClazz;// 监听器类型
     private static OSFClientListener listener;// 监听器
 
-    private String respPayloadClazz;// 响应载体字节码
-
     @Override
     public String clientName() {
         return clientName;
@@ -111,11 +109,6 @@ public abstract class AbstractClient implements OSFClient {
         context.setClient(this);
 
         return context;
-    }
-
-    @Override
-    public void respPayloadClazz(String clazzName) {
-        respPayloadClazz = clazzName;
     }
 
     @Override

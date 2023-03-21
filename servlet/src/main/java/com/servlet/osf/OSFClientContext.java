@@ -18,7 +18,7 @@ public class OSFClientContext implements Serializable {
     private OSFClient client;// 客户端
     private String innerRequestId = UUID.randomUUID().toString();// 内部编号
     private String reqStr;// 请求报文字符串
-    private String respClazz;// 响应对象字节码
+    private Class<?> respClazz;// 响应对象字节码
     private static final ThreadLocal<OSFClientContext> globalContext = new InheritableThreadLocal<>();
 
     public static void setContext(OSFClientContext context) {

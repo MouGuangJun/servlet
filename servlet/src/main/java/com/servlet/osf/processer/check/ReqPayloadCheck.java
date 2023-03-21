@@ -94,6 +94,12 @@ public class ReqPayloadCheck implements Checker {
         // 字符串
         String str = value.toString();
         if (child.getType() == STRING) {
+            // 空字符串
+            if ("".equals(str)) {
+                tips.error("必须属性[" + child.getName() + "]未录入！");
+                return;
+            }
+            // 字段内容超长
             if (str.length() > integer) {
                 tips.error("属性：[" + child.getName() + "]内容超长！期望长度：[" + integer + "]，实际长度：[" + str.length() + "]！");
                 return;

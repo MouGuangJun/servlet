@@ -35,10 +35,29 @@ public class OSFUtils {
      * @return 交易流水号
      */
     public static String getProvidTranNo() {
+        return getTradeNo("DEFINED_PROVID_TRAN");
+    }
+
+    /**
+     * 获取全局流水号
+     *
+     * @return 全局流水号
+     */
+    public static String getTxLogNo() {
+        return getTradeNo("DEFINED_SERSEQ");
+    }
+
+    /**
+     * 获取交易流水号
+     *
+     * @param tableName 表名
+     * @return 交易流水号
+     */
+    private static String getTradeNo(String tableName) {
         Date date = new Date();
         String systemDate = DateUtil.format(date, "yyyyMMdd");
         String systemTime = DateUtil.format(date, "HHmmss");
-        String serialNo = SerialHelper.getSimpleSerialNo("DEFINED_PROVID_TRAN", "SERIALNO");
+        String serialNo = SerialHelper.getSimpleSerialNo(tableName, "SERIALNO");
         assert serialNo != null;
         String sortNo = serialNo.substring(8);
         String flag = SystemId.CCMS.getFlag();

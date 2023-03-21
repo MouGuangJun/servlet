@@ -27,8 +27,14 @@ public class HttpClient extends AbstractClient {
 
     @Override
     public RespServiceMsg call(ReqServiceMsg request) {
+
+        return call(request, (Class<?>) null);
+    }
+
+    @Override
+    public RespServiceMsg call(ReqServiceMsg request, Class<?> respClazz) {
         OSFClientContext context = createContext();
-        context.setRespClazz(getRespPayloadClazz());
+        context.setRespClazz(respClazz);
 
         return call(request, context);
     }

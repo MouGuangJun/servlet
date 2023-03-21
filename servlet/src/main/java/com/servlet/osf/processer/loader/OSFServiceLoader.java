@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.servlet.osf.OSFManager;
 import com.servlet.osf.annotation.OSFService;
 import com.servlet.osf.exception.OSFException;
-import com.servlet.osf.services.BaseService;
+import com.servlet.osf.services.server.BaseService;
 import lombok.Data;
 
 /**

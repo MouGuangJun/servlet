@@ -1,6 +1,5 @@
 package com.servlet.osf.json;
 
-import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.type.MapType;
@@ -38,17 +37,16 @@ public class DefaultClientJsonPacker extends AbstractJsonPacker implements JsonC
             RespAppHeader appHeader = mapper.convertValue(node.get("AppHeader"), RespAppHeader.class);
             response.setAppHeader(appHeader);
             // 获取响应对象字节码
-            String respClazz = context.getRespClazz();
+            Class<?> respClazz = context.getRespClazz();
             Object body;// 解析响应内容
-            if (StrUtil.isBlank(respClazz)) {
+            if (respClazz == null) {
                 MapType mapType = mapper.getTypeFactory().constructMapType(HashMap.class, String.class, Object.class);
                 body = mapper.convertValue(node.get("Body"), mapType);
             } else {
-                body = mapper.convertValue(node.get("Body"), Class.forName(respClazz));
+                body = mapper.convertValue(node.get("Body"), respClazz);
             }
             response.setBody(body);
-
-        } catch (JsonProcessingException | ClassNotFoundException e) {
+        } catch (JsonProcessingException e) {
             throw new OSFException(OSFException.JSON_PROCESSING, e);
         }
 
