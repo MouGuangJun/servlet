@@ -20,6 +20,7 @@ import java.io.IOException;
 @Slf4j
 public class MicroServiceServlet extends HttpServlet {
 
+    private static final long serialVersionUID = -6885963378430063046L;
     private StringPayloadServerModel serverModel;
 
 
@@ -37,6 +38,7 @@ public class MicroServiceServlet extends HttpServlet {
             context.setReq(req);
             context.setResp(resp);
             serverModel.service(in, out, context);
+            OSFContext.removeContext();// 清除上下文对象
         } catch (Exception e) {
             log.error("执行服务异常：", e);
         }

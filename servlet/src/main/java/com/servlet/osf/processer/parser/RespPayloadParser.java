@@ -4,6 +4,7 @@ import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import com.servlet.osf.OSFContext;
 import com.servlet.osf.entity.OSFMetaField;
+import com.servlet.osf.utils.OSFUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,7 @@ public class RespPayloadParser implements OSFParser {
             log.warn("响应体或者OSF上下文为空，不进行解析操作！");
             return;
         }
+
         // 响应元数据
         OSFMetaField metaField = context.getOsfService().getRespMetaField();
         parse(respPayload, metaField);
@@ -54,7 +56,7 @@ public class RespPayloadParser implements OSFParser {
                 parseSingle(obj, child);
             }
             // 获取对象值
-            Object value = ReflectUtil.getFieldValue(obj, child.getName());
+            Object value = OSFUtils.getFieldValue(obj, child.getName());
             // 对象类型
             if (child.getType() == OBJECT) {
                 parse(value, child);
@@ -74,7 +76,7 @@ public class RespPayloadParser implements OSFParser {
      */
     private void parseSingle(Object obj, OSFMetaField child) {
         // 获取对象值
-        Object value = ReflectUtil.getFieldValue(obj, child.getName());
+        Object value = OSFUtils.getFieldValue(obj, child.getName());
         // 检查是否必须
         if (child.isRequire() && value == null) {
             log.warn("必须属性[" + child.getName() + "]未录入！");

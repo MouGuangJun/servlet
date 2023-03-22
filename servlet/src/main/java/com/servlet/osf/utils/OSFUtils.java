@@ -1,12 +1,14 @@
 package com.servlet.osf.utils;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.servlet.constant.SystemId;
 import com.servlet.osf.exception.OSFException;
 import com.servlet.utils.SerialHelper;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * OSF的工具类
@@ -64,5 +66,22 @@ public class OSFUtils {
 
         // 系统编码（6） + 日期（8） + 时间（6） + 标识（1） + 序号（8）
         return SystemId.SYSTEM_CODE + systemDate + systemTime + flag + sortNo;
+    }
+
+
+    /**
+     * 获取对象中的属性值
+     *
+     * @param obj       对象
+     * @param fieldName 属性名称
+     * @return 属性值
+     */
+    @SuppressWarnings("unchecked")
+    public static Object getFieldValue(Object obj, String fieldName) {
+        if (obj instanceof Map) {
+            return ((Map<Object, Object>) obj).get(fieldName);
+        }
+
+        return ReflectUtil.getFieldValue(obj, fieldName);
     }
 }

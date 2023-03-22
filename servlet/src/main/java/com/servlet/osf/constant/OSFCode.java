@@ -13,6 +13,8 @@ public class OSFCode {
 
 
     // 9XXXXX 系统错误
+    public static final String SERVER_BUSY = "900010";// 超出流量控制
+
     public static final String ERROR = "999999";// 通用失败
     // 服务返回状态
     public static final String RET_STATUS_SUCCESS = "S";// 成功

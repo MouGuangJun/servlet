@@ -11,18 +11,18 @@ import com.servlet.osf.message.RespServiceMsg;
 public interface BaseService {
 
     /**
-     * 获取请求对象
+     * 请求对象字节码
      *
-     * @return 请求对象
+     * @return 请求对象字节码
      */
-    Object getRequestObj();
+    Class<?> requestClazz();
 
     /**
-     * 获取响应对象
+     * 响应对象字节码
      *
-     * @return 响应对象
+     * @return 响应对象字节码
      */
-    Object getResponseObj();
+    Class<?> responseClazz();
 
     /**
      * 执行服务

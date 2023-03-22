@@ -6,10 +6,13 @@ import lombok.Getter;
  * OSF执行异常
  */
 public class OSFException extends RuntimeException {
+    private static final long serialVersionUID = -8541962656194708557L;
     public static final int NORMAL_ERROR = 999999;
     // 业务导致的异常 1XXXXX
     public static final int SERVICE_NOT_FOUND = 101010;// 服务未找到
     public static final int CLIENT_NAME_EMPTY = 101020;// 客户端名称为空
+    public static final int ASYNC_EXECUTE_ERROR = 101030;// 异步执行业务逻辑错误
+    public static final int ASYNC_SERVER_NOT_FOUND = 101040;// 异步返回场景未定义
 
 
     // 程序异常 9XXXXX

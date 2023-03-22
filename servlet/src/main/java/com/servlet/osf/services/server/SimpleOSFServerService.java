@@ -87,7 +87,7 @@ public abstract class SimpleOSFServerService implements BaseService {
      * @param request 请求信息
      * @param context 上下文
      */
-    protected abstract void proccess(ReqServiceMsg request, OSFContext context);
+    public abstract void proccess(ReqServiceMsg request, OSFContext context) throws Exception;
 
     // 设置状态为成功
     protected void setSuccess() {

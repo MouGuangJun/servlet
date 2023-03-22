@@ -1,10 +1,10 @@
 package com.servlet.osf.processer.check;
 
-import cn.hutool.core.util.ReflectUtil;
 import com.servlet.osf.OSFContext;
 import com.servlet.osf.entity.OSFMetaField;
 import com.servlet.osf.message.OSFTips;
 import com.servlet.osf.message.ReqServiceMsg;
+import com.servlet.osf.utils.OSFUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -54,7 +54,7 @@ public class ReqPayloadCheck implements Checker {
         if (obj == null) return;
         // 检查每个子元素
         for (OSFMetaField child : metaField.getChildren()) {
-            Object value = ReflectUtil.getFieldValue(obj, child.getName());
+            Object value = OSFUtils.getFieldValue(obj, child.getName());
             // 基础类型
             if (child.isPrimitive()) {
                 checkSingle(value, child);

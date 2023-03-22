@@ -34,7 +34,7 @@ public class TradeClientDemo {
         client.setReqPayload(requestObj);
         client.setRespClazz(TradeDemoResponse.class);
 
-        String respCode = client.sentMessage();
+        String respCode = client.sendMessage();
         System.out.println(respCode);
         try {
             System.out.println(AbstractJsonPacker.mapper.writeValueAsString(client.getRespPayload()));

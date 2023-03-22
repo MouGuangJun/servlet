@@ -13,17 +13,17 @@ import java.util.Collections;
 @OSFService(name = "TradeDemo", code = "P01Q000125")
 public class TradeDemo extends SimpleOSFServerService {
     @Override
-    public Object getRequestObj() {
-        return new TradeDemoRequest();
+    public Class<?> requestClazz() {
+        return TradeDemoRequest.class;
     }
 
     @Override
-    public Object getResponseObj() {
-        return new TradeDemoResponse();
+    public Class<?> responseClazz() {
+        return TradeDemoResponse.class;
     }
 
     @Override
-    protected void proccess(ReqServiceMsg request, OSFContext context) {
+    public void proccess(ReqServiceMsg request, OSFContext context) {
         System.out.println(reqPayload);
         System.out.println("执行对应的业务逻辑...");
 

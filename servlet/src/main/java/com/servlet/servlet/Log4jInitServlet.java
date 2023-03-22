@@ -10,6 +10,8 @@ import java.io.IOException;
 
 public class Log4jInitServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 8725629895935614606L;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

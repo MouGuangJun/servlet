@@ -96,7 +96,7 @@ public class SimpleOSFClientService {
      * 成功：{@link OSFCode#RET_STATUS_SUCCESS}
      * 失败：{@link OSFCode#RET_STATUS_FAILED}
      */
-    public String sentMessage() {
+    public String sendMessage() {
         // 初始化基本信息
         app_BRANTH_ID = "53030200";// 机构号
         app_TRAN_TELLER = SystemId.SYSTEM_CODE;// 柜员号
@@ -187,11 +187,12 @@ public class SimpleOSFClientService {
         esbHeader.setCHANNEL_CODE(CHANNEL_CODE);
         esbHeader.setCONSUM_REQ_DATE(REQ_DATE);
         esbHeader.setCONSUM_REQ_TIME(REQ_TIME);
-        // 获取全局流水号
+        // 获取序列号
         if (StrUtil.isBlank(esb_SERVICE_REQ_SEQ)) {
             esb_SERVICE_REQ_SEQ = OSFUtils.getTxLogNo();
-            esb_GLOBAL_SEQ = "G" + esb_SERVICE_REQ_SEQ;
         }
+        // 全局流水号
+        esb_GLOBAL_SEQ = "G" + esb_SERVICE_REQ_SEQ;
         esbHeader.setSERVICE_REQ_SEQ(esb_SERVICE_REQ_SEQ);
         esbHeader.setGLOBAL_SEQ(esb_GLOBAL_SEQ);
         esbHeader.setSRC_ENC_CODE(esb_SRC_ENC_CODE);

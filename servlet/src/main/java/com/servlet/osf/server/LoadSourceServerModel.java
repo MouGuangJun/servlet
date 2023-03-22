@@ -1,7 +1,6 @@
 package com.servlet.osf.server;
 
 import cn.hutool.core.util.StrUtil;
-import com.servlet.osf.OSFContext;
 import com.servlet.osf.OSFManager;
 import com.servlet.osf.exception.OSFException;
 import com.servlet.osf.processer.loader.OSFServiceLoader;
@@ -30,6 +29,5 @@ public abstract class LoadSourceServerModel implements ServerModel {
     @Override
     public void distroy() throws OSFException {
         OSFManager.clear();
-        OSFContext.removeContext();
     }
 }

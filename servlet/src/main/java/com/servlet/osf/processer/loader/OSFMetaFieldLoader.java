@@ -21,19 +21,19 @@ public class OSFMetaFieldLoader implements OSFLoader {
     @Override
     public void load() {
         if (OSFService == null) return;
-        Object requestObj = OSFService.getService().getRequestObj();
-        Object responseObj = OSFService.getService().getResponseObj();
-        OSFService.setReqMetaField(parseMetaField(requestObj));
-        OSFService.setRespMetaField(parseMetaField(responseObj));
+        Class<?> requestClazz = OSFService.getService().getClass();
+        Class<?> responseClazz = OSFService.getService().getClass();
+        OSFService.setReqMetaField(parseMetaField(requestClazz));
+        OSFService.setRespMetaField(parseMetaField(responseClazz));
     }
 
     // 解析属性
-    private OSFMetaField parseMetaField(Object obj) {
+    private OSFMetaField parseMetaField(Class<?> clazz) {
         OSFMetaField metaField = new OSFMetaField();
         metaField.setName("root");
         metaField.setLabel("根节点");
         metaField.setType(ROOT);
-        parseField(obj.getClass(), metaField);// 开始解析
+        parseField(clazz, metaField);// 开始解析
 
         return metaField;
     }

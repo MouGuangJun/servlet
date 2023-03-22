@@ -45,9 +45,9 @@ public class DefaultJsonPacker extends AbstractJsonPacker implements JsonPacker 
             }
 
             context.setOsfService(service.clone());
-            Object requestObj = service.getService().getRequestObj();// 请求信息
+            Class<?> requestClazz = service.getService().requestClazz();// 请求信息
             // 解析报文体信息
-            Object body = mapper.convertValue(node.get("Body"), requestObj.getClass());
+            Object body = mapper.convertValue(node.get("Body"), requestClazz);
             request.setBody(body);
 
             // 设置请求信息

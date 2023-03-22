@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class ArrayRequest {
-    @OSFMetaField(require = true)
+    @OSFMetaField/*(require = true)*/
     private String TYPE;
 }
