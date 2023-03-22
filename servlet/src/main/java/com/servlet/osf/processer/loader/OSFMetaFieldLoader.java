@@ -21,8 +21,8 @@ public class OSFMetaFieldLoader implements OSFLoader {
     @Override
     public void load() {
         if (OSFService == null) return;
-        Class<?> requestClazz = OSFService.getService().getClass();
-        Class<?> responseClazz = OSFService.getService().getClass();
+        Class<?> requestClazz = OSFService.getService().requestClazz();
+        Class<?> responseClazz = OSFService.getService().responseClazz();
         OSFService.setReqMetaField(parseMetaField(requestClazz));
         OSFService.setRespMetaField(parseMetaField(responseClazz));
     }
